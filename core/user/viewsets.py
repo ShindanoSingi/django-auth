@@ -5,13 +5,14 @@ from rest_framework import viewsets
 from rest_framework.permissions import IsAuthenticated
 from rest_framework import filters
 
-class UserViewSet(models.ModelViewSet):
-    http_method_names = ['get']
+
+class UserViewSet(viewsets.ModelViewSet):
+    http_method_names = ["get"]
     serializers_class = UserSerializer
     permission_classes = (IsAuthenticated,)
     filter_backends = [filters.OrderingFilter]
-    ordering_fields = ['updated_at', 'created_at']
-    ordering = ['-updated']
+    ordering_fields = ["updated", "created"]
+    ordering = ["-updated"]
 
     def get_queryset(self):
         if self.request.user.is_superuser:
@@ -24,6 +25,7 @@ class UserViewSet(models.ModelViewSet):
         self.check_object_permissions(self.request, obj)
 
         return obj
+
 
 class TodoViewSet(viewsets.ModelViewSet):
     serializers_class = TodoSerializer
