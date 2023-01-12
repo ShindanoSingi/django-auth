@@ -37,6 +37,7 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
+    "rest_framework",
     "core",
     "core.user",
 ]
@@ -71,6 +72,7 @@ TEMPLATES = [
 
 WSGI_APPLICATION = "CoreRoot.wsgi.application"
 
+AUTH_USER_MODEL = "core_user.User"
 
 # Database
 # https://docs.djangoproject.com/en/4.0/ref/settings/#databases
@@ -100,6 +102,15 @@ AUTH_PASSWORD_VALIDATORS = [
         "NAME": "django.contrib.auth.password_validation.NumericPasswordValidator",
     },
 ]
+
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES' : (
+        'rest_framework_simplejwt.Authentication.JWTAuthentication',
+    ),
+    'DEFAULT_RENDERER_CLASSES' : (
+        'rest_framework.renderers.JSONRenderer',
+    ),
+}
 
 
 # Internationalization
